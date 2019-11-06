@@ -1,0 +1,7 @@
+<h4>List of Celebrities</h4><br>
+
+<ul class="list-group list-group-flush">
+  {{#each celebrity}}
+    <li class="list-group-item"><a href="celebrities/{{this.id}}">{{this.name}}</a></li>
+  {{/each}}
+</ul>
