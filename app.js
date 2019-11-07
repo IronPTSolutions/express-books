@@ -1,3 +1,5 @@
+//Dependencias
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -29,10 +31,10 @@ app.set('view engine', 'hbs');
  * Configure routes
  */
 const router = require('./config/routes.js');
-app.use('/', router);
+app.use('/', router); //para cualquier ruta vaya a router
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function (req, res, next) { //next es un callback
     next(createError(404));
 });
 
