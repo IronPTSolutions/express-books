@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="card-columns">
+      {{#each celebrities as |celebrity| }}
+        <div class="card">
+          <img src="{{this.image}}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-tittle">{{this.name}}</h5>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
