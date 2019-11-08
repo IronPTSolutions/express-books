@@ -1,0 +1,7 @@
+{
+  "jshint.options": {
+    "esversion": 6
+  },
+  "files.autoSave": "afterDelay",
+  "editor.tabSize": 2
+}
