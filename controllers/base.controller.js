@@ -1,6 +1,7 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 const Celebrity = require('../models/celebrity')
+const Movie = require('../models/movie')
 
 module.exports.base = (req, res, next) => {
 	res.render('index', {
@@ -63,7 +64,6 @@ module.exports.editCelebrity = (req, res, next) => {
 	const id = req.params.id
 	Celebrity.findById(id)
 		.then(celebrity => {
-			console.log(celebrity.catchPhrase)
 			res.render('celebrities/edit', celebrity)
 		})
 		.catch(error => {
@@ -82,6 +82,85 @@ module.exports.doEditCelebrity = (req, res, next) => {
 		.then(celebrity => {
 			console.log(`"Celebrity ${celebrity.name} edited successfully!`)
 			res.redirect('/celebrities')
+		})
+		.catch(error => {
+			next(createError(error))
+		})
+}
+
+// MOVIES
+module.exports.listMovies = (req, res, next) => {
+	Movie.find()
+		.then(movies => {
+			res.render('movies/index', { movies })
+		})
+		.catch(error => console.log("Error in listMovies => ", error))
+}
+
+module.exports.movieDetail = (req, res, next) => {
+	const id = req.params.id
+	Movie.findById(id)
+		.then(movies => {
+			res.render('movies/show', movies)
+		})
+		.catch(error => console.log("Error in movieDetail => ", error))
+}
+
+module.exports.addMovie = (req, res, next) => {
+	res.render('movies/new')
+}
+
+module.exports.doAddMovie = (req, res, next) => {
+	const data = {
+		title: req.body.title,
+		genre: req.body.genre,
+		plot: req.body.plot
+	}
+	new Movie(data).save()
+		.then(movie => {
+			console.log(`"Movie ${movie.title} added successfully!`)
+			res.redirect('/movies')
+		})
+		.catch(error => {
+			console.log("Error in addMovie => ", error)
+			res.redirect('/movies/new')
+		})
+}
+
+module.exports.deleteMovie = (req, res, next) => {
+	const id = req.params.id
+	Movie.findByIdAndDelete(id)
+		.then(movie => {
+			console.log(`Movie ${movie.title} deleted successfully!`)
+			res.redirect('/movies')
+		})
+		.catch(error => {
+			next(createError(error))
+		})
+}
+
+module.exports.editMovie = (req, res, next) => {
+	const id = req.params.id
+	Movie.findById(id)
+		.then(movie => {
+				res.render('movies/edit', movie)
+		})
+		.catch(error => {
+			next(createError(error))
+		})
+}
+
+module.exports.doEditMovie = (req, res, next) => {
+	const id = req.params.id
+	const data = {
+		title: req.body.title,
+		genre: req.body.genre,
+		plot: req.body.plot
+	}
+	Movie.findByIdAndUpdate(id, { $set: data }, { new: true })
+		.then(movie => {
+			console.log(`"Movie ${movie.name} edited successfully!`)
+			res.redirect('/movies')
 		})
 		.catch(error => {
 			next(createError(error))

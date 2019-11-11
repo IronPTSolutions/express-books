@@ -1,0 +1,13 @@
+<h2>Editing a movie:</h2>
+<form method="POST" action="/movies/{{this.id}}" autocomplete="off">
+  <label for="">Title:</label>
+  <input name="title" type="text" value="{{this.title}}">
+
+  <label for="">Genre:</label>
+  <input name="genre" type="text" value="{{this.genre}}">
+
+  <label for="">Plot:</label>
+  <input name="plot" type="text" value="{{this.plot}}">
+
+  <input type="submit" value="Edit celebrity!">
+</form>
