@@ -1,7 +1,7 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 const Celebrity = require('../models/celebrity.model');
-const bodyParser = require('body-parser');
+
 
 //index
 module.exports.base = (req, res, next) => {
@@ -17,8 +17,59 @@ module.exports.listCelebrities = (req, res, next) => {
 		.then(
 			celebrities => {
 				res.render('celebrities', { celebrities })
-			})
-		.cath(
+			}
+		).catch(
 			error => next(error)
-		);
+		)
 };
+
+//ficha cada una
+module.exports.celebrityDetail = (req, res, next) => {
+	const id = req.params.id;
+	if(!mongoose.Types.ObjectId.isValid(id)){
+		next(createError(404));
+	}
+	Celebrity.findById(id)
+		.then(
+			celebrity => {
+				res.render('detail', { celebrity })
+			}
+		).catch(
+			error => next(error)
+		)
+};
+
+//create
+module.exports.create = (req, res, nex) => {
+	res.render('form', {
+		celebrity: new Celebrity()
+	})
+}
+
+//add to db
+module.exports.addCelebrity = (req, res, nex) => {
+	const { name, occupation, catchPhrase, image } = req.body
+	const newCelebrity = new Celebrity({ name, occupation, catchPhrase, image })
+
+	newCelebrity.save()
+		.then(celebrity => {
+			console.info('new celebrity =>', celebrity)
+			res.redirect('celebrities')
+		}).catch(error => next(error))
+}
+
+//delete
+module.exports.delete = (req, res, nex) => {
+	const id = req.params.id;
+
+	if(!mongoose.Types.ObjectId.isValid(id)){
+		next(createError(404));
+	}
+	Celebrity.findByIdAndRemove(id)
+		.then(celebrityRemoved => {
+			console.info('celebrityRemoved =>', celebrityRemoved)
+			res.redirect('/')
+		}).catch(
+			error => next(error)
+		)
+}

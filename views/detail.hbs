@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="h1">{{celebrity.name}}</h2>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-4">
+          <img src="{{celebrity.image}}" class="card-img-top">
+        </div>
+        <div class="col-8">
+        <h5>Occupation:</h5>
+        <p>{{celebrity.occupation}}</p>
+        <blockquote class="blockquote mb-0">
+          <h5>Cath Phrase:</h5>
+          <p>{{celebrity.catchPhrase}}</p>
+        </blockquote>
+        </div>
+      </div><!--row-->
+    </div><!--card-body-->
+
+  <div class="card-footer text-muted">
+    <a href="/celebrities" class="btn btn-primary">Back</a>
+    <form class="d-inline" action="{{celebrity.id}}/delete" method="POST">
+      <button class="btn btn-danger" type="submit">Delete</button>
+    </form>
+  </div>
+
+  </div><!--card-->
+</div>

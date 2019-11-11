@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
 /**
  * Handlebars and Mongoose config
@@ -17,6 +18,7 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 /**

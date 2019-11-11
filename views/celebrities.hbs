@@ -3,12 +3,17 @@
     <div class="card-columns">
       {{#each celebrities as |celebrity| }}
         <div class="card">
-          <img src="{{this.image}}" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-tittle">{{this.name}}</h5>
+            <h5 class="card-tittle mb-4">{{this.name}}</h5>
+            <a href="{{this.id}}" class="btn btn-primary">Details</a>
           </div>
         </div>
       {{/each}}
     </div>
+    <hr/>
+    <div class="col-12 mt-4 pt-4">
+      <a href="/create" class="btn btn-success btn-block">Create new celebrity</a>
+    </div>
+
   </div>
 </div>
