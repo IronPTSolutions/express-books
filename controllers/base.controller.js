@@ -70,6 +70,6 @@ module.exports.delete = (req, res, nex) => {
 			console.info('celebrityRemoved =>', celebrityRemoved)
 			res.redirect('/')
 		}).catch(
-			error => next(error)
+			error => next(error) 
 		)
 }
