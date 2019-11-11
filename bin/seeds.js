@@ -1,6 +1,10 @@
 const celebrityModel = require('../models/celebrity');
 require('../config/db.config')
 
+celebrityModel.deleteMany()
+  .then(msg => console.log('Deleted database'))
+  .catch(err => console.log('Error deleting database'))
+
 const data =
   [
     {
