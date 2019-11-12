@@ -21,6 +21,9 @@
 
   <div class="card-footer text-muted">
     <a href="/celebrities" class="btn btn-primary">Back</a>
+
+    <a href="/celebrities/{{celebrity.id}}/edit" class="btn btn-secondary">Edit</a>
+
     <form class="d-inline" action="{{celebrity.id}}/delete" method="POST">
       <button class="btn btn-danger" type="submit">Delete</button>
     </form>

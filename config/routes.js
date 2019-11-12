@@ -11,4 +11,4 @@ router.get('/celebrities/:id/edit', controller.edit);
 router.post('/celebrities/:id/delete', controller.delete);
 router.post('/celebrities/:id/edit', controller.editCelebrity);
 
-module.exports = router;
+module.exports = router; 

@@ -83,12 +83,12 @@ module.exports.edit = (req, res, next) => {
 	} else {
 		Celebrity.findById(id)
 		.then(
-			book => {
+			celebrity => {
 				res.render('celebrities/form', { celebrity })
 			}).catch(
 				error => next(error)
 		);
-	}
+	} 
 }
 
 module.exports.editCelebrity = (req, res, nex) => {
@@ -98,8 +98,8 @@ module.exports.editCelebrity = (req, res, nex) => {
 		next(createError(404));
 	}
 	Celebrity.findByIdAndUpdate(id, req.body, { new: true })
-		.then(celebrityEdited => {
-			console.info('celebrityEdited =>', celebrityEdited)
+		.then(celebrity => {
+			console.info('Edited =>', celebrity)
 			res.redirect(`/celebrities/${id}`)
 		}).catch(
 			error => next(error) 
