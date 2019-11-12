@@ -5,4 +5,8 @@
     <p>{{movie.genre}}</p>
     <h5>Plot</h5>
     <p>{{movie.plot}}</p>
+    <h5>Celebrities</h5>
+    {{#each movie.celebrities as |celebrity|}}
+      {{>showCelebrity celebrity}}
+    {{/each}}
   </div>

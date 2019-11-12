@@ -93,6 +93,7 @@ module.exports.movies = (req, res, next) => {
 
 module.exports.movie = (req, res, next) => {
   Movie.findById(req.params.id)
+    .populate('celebrities')
     .then(data => res.render('movies/show', {
       movie: data
     }))

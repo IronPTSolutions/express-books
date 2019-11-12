@@ -22,21 +22,29 @@ require('../config/db.config');
 //   .catch(error => console.log(error))
 //   .then(() => mongoose.connection.close());
 
-const movies = [{
-    title: "a",
-    genre: "a",
-    plot: "a"
-  },{
-    title: "b",
-    genre: "b",
-    plot: "b"
-  },{
-    title: "c",
-    genre: "c",
-    plot: "c"
-  }];
+Celebrity.find()
+  .then(celebrities => {
+    const movies = [{
+      title: "a",
+      genre: "a",
+      plot: "a",
+      celebrities: celebrities[0]
+    },{
+      title: "b",
+      genre: "b",
+      plot: "b",
+      celebrities: celebrities[1]
+    },{
+      title: "c",
+      genre: "c",
+      plot: "c",
+      celebrities: celebrities[2]
+    }];
+  
+  Movie.create(movies)
+    .then(movies => console.info(`${movies.length} new movies added to the database`))
+    .catch(error => console.log(error))
+    .then(() => mongoose.connection.close());
+  });
 
-Movie.create(movies)
-  .then(movies => console.info(`${movies.length} new movies added to the database`))
-  .catch(error => console.log(error))
-  .then(() => mongoose.connection.close());
+
