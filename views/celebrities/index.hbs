@@ -4,7 +4,6 @@
     <div class="">
       <a class="row" href="/celebrities/{{this.id}}">{{this.name}}</a>
       <div class="row">
-        <a class="btn btn-success" href="/celebrities/new">Add</a>
         <a class="btn btn-secondary" href="/celebrities/{{this.id}}/edit">Edit</a>
         <form action="/celebrities/{{this.id}}/delete" method="post">
           <button class="btn btn-danger" type="submit">Delete</button>
@@ -12,4 +11,5 @@
       </div>
     </div>
   {{/each}}
+  <a class="btn btn-success" href="/celebrities/new">Add</a>
 </div>

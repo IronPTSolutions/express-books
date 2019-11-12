@@ -1,10 +1,15 @@
 <h2>Movies</h2>
-{{#each movies}}
-  <div>
-    <h1>{{this.title}}</h1>
-    <h5>Genre</h5>
-    <p>{{this.genre}}</p>
-    <h5>Plot</h5>
-    <p>{{this.plot}}</p>
-  </div>
-{{/each}}
+<div>
+  {{#each movies}}
+    <div>
+      <a href="/movies/{{this.id}}">{{this.title}}</a>
+      <div class="row">
+        <a class="btn btn-secondary" href="/movies/{{this.id}}/edit">Edit</a>
+        <form action="/movies/{{this.id}}/delete" method="post">
+          <button class="btn btn-danger" type="submit">Delete</button>
+        </form>
+      </div>
+    </div>
+  {{/each}}
+  <a class="btn btn-success" href="/movies/new">Add</a>
+</div>
