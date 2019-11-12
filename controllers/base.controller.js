@@ -16,7 +16,7 @@ module.exports.listCelebrities = (req, res, next) => {
 	Celebrity.find()
 		.then(
 			celebrities => {
-				res.render('celebrities', { celebrities })
+				res.render('celebrities/celebritiesList', { celebrities })
 			}
 		).catch(
 			error => next(error)
@@ -32,7 +32,7 @@ module.exports.celebrityDetail = (req, res, next) => {
 	Celebrity.findById(id)
 		.then(
 			celebrity => {
-				res.render('detail', { celebrity })
+				res.render('celebrities/detail', { celebrity })
 			}
 		).catch(
 			error => next(error)
@@ -41,7 +41,7 @@ module.exports.celebrityDetail = (req, res, next) => {
 
 //create
 module.exports.create = (req, res, nex) => {
-	res.render('form', {
+	res.render('celebrities/form', {
 		celebrity: new Celebrity()
 	})
 }
@@ -68,7 +68,39 @@ module.exports.delete = (req, res, nex) => {
 	Celebrity.findByIdAndRemove(id)
 		.then(celebrityRemoved => {
 			console.info('celebrityRemoved =>', celebrityRemoved)
-			res.redirect('/')
+			res.redirect('/celebrities')
+		}).catch(
+			error => next(error) 
+		)
+}
+
+//edit
+module.exports.edit = (req, res, next) => {
+	const id = req.params.id;
+
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+			next(createError(404));
+	} else {
+		Celebrity.findById(id)
+		.then(
+			book => {
+				res.render('celebrities/form', { celebrity })
+			}).catch(
+				error => next(error)
+		);
+	}
+}
+
+module.exports.editCelebrity = (req, res, nex) => {
+	const id = req.params.id;
+
+	if(!mongoose.Types.ObjectId.isValid(id)){
+		next(createError(404));
+	}
+	Celebrity.findByIdAndUpdate(id, req.body, { new: true })
+		.then(celebrityEdited => {
+			console.info('celebrityEdited =>', celebrityEdited)
+			res.redirect(`/celebrities/${id}`)
 		}).catch(
 			error => next(error) 
 		)

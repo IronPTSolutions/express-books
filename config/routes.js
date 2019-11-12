@@ -6,9 +6,9 @@ router.get('/', controller.base);
 router.get('/celebrities', controller.listCelebrities);
 router.get('/create', controller.create); //ruta
 router.post('/create', controller.addCelebrity) //form
-router.get('/:id', controller.celebrityDetail);
-//router.get('/:id/edit', controller.edit);
-router.post('/:id/delete', controller.delete);
-//router.post('/:id/edit', controller.editCelebrity);
+router.get('/celebrities/:id', controller.celebrityDetail); //ficha c/u
+router.get('/celebrities/:id/edit', controller.edit);
+router.post('/celebrities/:id/delete', controller.delete);
+router.post('/celebrities/:id/edit', controller.editCelebrity);
 
 module.exports = router;
