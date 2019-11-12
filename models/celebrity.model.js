@@ -5,7 +5,8 @@ const celebritySchema = new Schema ({
   name: String,
   occupation: String,
   catchPhrase: String,
-  image: String
+  image: String,
+  movie: [ { type : Schema.Types.ObjectId, ref: 'Movie' } ]
 })
 
 //Export the Celebrity model.

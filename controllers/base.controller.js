@@ -1,6 +1,7 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 const Celebrity = require('../models/celebrity.model');
+const Movie = require('../models/movie.model');
 
 
 //index
