@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="h1">{{movie.title}}</h2>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-4">
+          <img src="{{movie.pictureUrl}}" class="card-img-top">
+        </div>
+        <div class="col-8">
+          <h5>genre:</h5>
+          <p>{{movie.genre}}</p>
+          <h5>plot:</h5>
+          <p>{{movie.plot}}</p>
+          <h5>rate:</h5>
+          <p>{{movie.rate}}</p>
+        </div>
+      </div>
+    </div><!--card-body-->
+
+    <div class="card-footer text-muted">
+      <a href="/movies" class="btn btn-primary">Back</a>
+
+      <a href="/movies/{{movie.id}}/edit" class="btn btn-secondary">Edit</a>
+
+      <form class="d-inline" action="{{movie.id}}/delete" method="POST">
+        <button class="btn btn-danger" type="submit">Delete</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 const Celebrity = require('../models/celebrity.model');
+const Movie = require('../models/movie.model');
 const mongoose = require('mongoose');
 require('../config/db.config');
 
@@ -91,6 +92,17 @@ const celebrities = [
 //   .catch(error => console.error(error))
 //   .then(() => mongoose.connection.close());
 
+const createMovies = celebrities.map(celebrity => {
+  const newMovie = new Movie(celebrity.movie)
+  return newMovie.save()
+  .then(movie => {
+    return movie.title;
+  })
+  .catch(error => {
+    throw new Error(`Impossible to add the author. ${error}`)
+  })
+})
+
 const findMovies = Promise.all(createMovies)
   .then(movies => {
     return celebrities.map(celebrity => {
@@ -104,7 +116,7 @@ const findMovies = Promise.all(createMovies)
         .then(movie => {
           if (!movie) {
             throw new Error(`unknown movie 
-              ${celebrity.movie.title}`);
+              ${celebrity.movie.title}`); 
           }
           return Object.assign({}, celebrity, {
             movie: movie._id
@@ -113,4 +125,20 @@ const findMovies = Promise.all(createMovies)
     });
   }).catch(error => {
     throw new Error(error)
+  })
+
+  const saveMovies = findMovies.then(findMovies => {
+    return Promise.all(findMovies)
+    .then(celebrities => {
+      return celebrities.map(celebrity => {
+        const newCelebrity = new Celebrity(celebrity);
+        return newCelebrity.save()
+      })
+    })
+  }).then(savedCelebrities => {
+    Promise.all(savedCelebrities)
+    .then(celebrities => celebrities.forEach(celebrity => 
+      console.log(`Created ${celebrity.name}`)))
+    .then(() => mongoose.connection.close())
+    .catch(error => console.log('Error', error))
   })
