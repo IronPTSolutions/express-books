@@ -1,7 +1,17 @@
 <h4>List of Movies</h4><br>
 
+<span class="d-flex align-items-end flex-column mr-4">
+  <a href="/movies/add" class="btn btn-success">Add</a><br>
+</span>
+
 <ul class="list-group list-group-flush">
   {{#each movie}}
-    <li class="list-group-item"><a href="movies/{{this.id}}">{{this.title}}</a></li>
+    <li class="list-group-item d-flex justify-content-between">
+      <a href="movies/{{this.id}}">{{this.title}}</a>
+      <div>
+        <a href="movies/{{this.id}}/edit" class="btn btn-secondary">Edit</a>
+        <a href="movies/{{this.id}}/delete" class="btn btn-danger">Delete</a>
+      </div>
+    </li>
   {{/each}}
 </ul>
