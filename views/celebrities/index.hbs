@@ -1,0 +1,17 @@
+<h4>List of Celebrities</h4><br>
+
+<span class="d-flex align-items-end flex-column mr-4">
+  <a href="/celebrities/add" class="btn btn-success">Add</a><br>
+</span>
+
+<ul class="list-group list-group-flush">
+  {{#each celebrity}}    
+    <li class="list-group-item d-flex justify-content-between">
+      <a href="celebrities/{{this.id}}">{{this.name}}</a>
+      <div>
+        <a href="celebrities/{{this.id}}/edit" class="btn btn-secondary">Edit</a>
+        <a href="celebrities/{{this.id}}/delete" class="btn btn-danger">Delete</a>
+      </div>
+    </li>
+  {{/each}}
+</ul>
