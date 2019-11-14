@@ -21,10 +21,12 @@
     <textarea class="form-control" id="catchphrase" name="catchPhrase" rows="3">{{this.catchPhrase}}</textarea>
   </div>
 
+<span class="d-flex align-items-end flex-column">
 {{#if celebrity.isNew}}
   <button type="submit" class="btn btn-success">Create</button>
 {{else}}
   <button type="submit" class="btn btn-success">Modify</button>
 {{/if}}
+</span>
 
 </form>

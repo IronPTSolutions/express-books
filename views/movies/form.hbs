@@ -3,28 +3,40 @@
   <form action="/movies/add" method="POST">
 {{else}}
   <h3>Edit movie</h3>
-  <form action="/movies/{{this.id}}/edit" method="POST">
+  <form action="/movies/{{movie.id}}/edit" method="POST">
 {{/if}}
 
   <div class="form-group">
     <label for="title">Title:</label>
-    <input type="text" id="title" name="title" class="form-control" value="{{this.title}}">
+    <input type="text" id="title" name="title" class="form-control" value="{{movie.title}}">
   </div>
 
   <div class="form-group">
     <label for="genre">Genre:</label>
-    <input type="text" id="genre" name="genre" class="form-control" value="{{this.genre}}">
+    <input type="text" id="genre" name="genre" class="form-control" value="{{movie.genre}}">
   </div>
 
   <div class="form-group">
     <label for="plot">Plot:</label>
-    <textarea class="form-control" id="plot" name="plot" rows="3">{{this.plot}}</textarea>
+    <textarea class="form-control" id="plot" name="plot" rows="3">{{movie.plot}}</textarea>
   </div>
 
+  <div class="form-group">
+  
+    <label for="celebrity">Celebrity:</label><br>
+    <select name="celebrity">
+      {{#each celebrities as |celebrity|}}
+        <option value="{{celebrity.id}}" id="{{celebrity.id}}">{{celebrity.name}}</option>
+      {{/each}}
+    </select>
+  </div><br>
+
+<span class="d-flex align-items-end flex-column">
 {{#if movie.isNew}}
   <button type="submit" class="btn btn-success">Create</button>
 {{else}}
   <button type="submit" class="btn btn-success">Modify</button>
 {{/if}}
+</span>
 
 </form>

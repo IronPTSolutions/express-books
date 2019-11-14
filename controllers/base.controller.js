@@ -95,26 +95,85 @@ module.exports.movieDetail = (req, res, next) => {
         next(createError(404));
     } else {
         Movie.findOne({_id: req.params.id})
+            .populate('celebrity')
             .then(movie => {
+                if (!movie) {
+                    return res.status(404).render('not-found')
+                }
                 res.render('movies/show.hbs', movie)
             })
             .catch(err => next(err))
     }
 }
 
+// module.exports.editMovie = (req, res, next) => {
+//     if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
+//         next(createError(404));
+//     } else {
+//         Movie.findOne({_id: req.params.id})
+//             .then(movie => {
+//                 res.render('movies/form.hbs', movie) 
+//             })
+//             .catch(err => next(err))
+//     }
+// }
+
+// module.exports.editMovie = (req, res, next) => {
+//     if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
+//         next(createError(404));
+//     } else {
+
+//         let celebrities = []
+
+//         Celebrity.find()
+//             .then(celebrity => {
+//                 celebrities = celebrity.map(el => el.name)
+//             })
+//             .catch(err => next(err))
+        
+//         Movie.findOne({_id: req.params.id})
+//             .then(movie => {
+//                 data = {
+//                     movie,
+//                     celebrities
+//                 }
+//                 res.render('movies/form.hbs', data) 
+//             })
+//             .catch(err => next(err))
+//     }
+// }
+
 module.exports.editMovie = (req, res, next) => {
     if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
         next(createError(404));
     } else {
-        Movie.findOne({_id: req.params.id})
+
+        const allCelebrities = Celebrity.find()
+            .then(celebrity => {
+                return celebrity
+            })
+            .catch(err => next(err))
+
+        const movie = Movie.findOne({_id: req.params.id})
             .then(movie => {
-                res.render('movies/form.hbs', movie) 
+                return movie
+            })
+            .catch(err => next(err))
+
+        Promise.all([allCelebrities, movie])
+            .then((values) => {
+                const data = {
+                    celebrities: values[0],
+                    movie: values[1]
+                }
+                res.render('movies/form.hbs', data)
             })
             .catch(err => next(err))
     }
 }
 
 module.exports.doEditMovie = (req, res, next) => {
+    console.log('bodt =>', req.body)
     if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
         next(createError(404));
     } else {
@@ -124,7 +183,7 @@ module.exports.doEditMovie = (req, res, next) => {
             { new: true }
         )
             .then((movie => {
-                console.log(movie)
+                console.log(req.body)
                 res.redirect(`/movies/${req.params.id}`)
             }))
             .catch(err => next(err))
@@ -132,9 +191,17 @@ module.exports.doEditMovie = (req, res, next) => {
 }
 
 module.exports.addMovies = (req, res, next) => {
-    res.render('movies/form', {
-        movie: new Movie
-    })
+
+    Celebrity.find()
+        .then(celebrity => {
+            const celebrities = celebrity.map(el => el)
+            const data = {
+                celebrities,
+                movie: new Movie
+            }
+            res.render('movies/form', data)
+        })
+        .catch(err => next(err))
 }
 
 module.exports.doAddMovies = (req, res, next) => {
@@ -158,3 +225,8 @@ module.exports.deleteMovie = (req, res, next) => {
             .catch(err => next(err))
     }
 }
+
+const p = [1,2,3,4]
+res = p.map(el => el * 2)
+
+res
