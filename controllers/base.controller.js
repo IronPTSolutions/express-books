@@ -140,9 +140,7 @@ module.exports.editCelebrity = (req, res, nex) => {
 	if(!mongoose.Types.ObjectId.isValid(id)){
 		next(createError(404));
 	}
-
-	//Celebrity.findByIdAndUpdate(id, req.body, { new: true })
-	Celebrity.findByIdAndUpdate(id, { $set: {title: req.body, genre: req.body, plot: req.body, rate: req.body, pictureUrl: req.body}, { new: true })
+	Celebrity.findByIdAndUpdate(id, req.body, { new: true }) 
 		.then(celebrity => {
 			console.info('Edited =>', celebrity)
 			res.redirect(`/celebrities/${id}`)
