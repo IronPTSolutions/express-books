@@ -10,7 +10,7 @@ module.exports.base = (req, res, next) => {
     });
 };
 
-module.exports.celebritieslist = (req, res, next) => {
+module.exports.celebritiesList = (req, res, next) => {
     Celebrity.find()
     .then(celebrities => {
         res.render('celebrities/index', { celebrities });
@@ -20,7 +20,7 @@ module.exports.celebritieslist = (req, res, next) => {
     })
 };
 
-module.exports.celebritydetail = (req, res, next) => {
+module.exports.celebrityDetail = (req, res, next) => {
 
     const id = req.params.id;
 
@@ -37,7 +37,7 @@ module.exports.celebritydetail = (req, res, next) => {
     }
 };
 
-module.exports.movieslist = (req, res, next) => {
+module.exports.moviesList = (req, res, next) => {
     Movie.find()
     .then(movies => {
         res.render('movies/index', { movies });
@@ -47,7 +47,7 @@ module.exports.movieslist = (req, res, next) => {
     })
 };
 
-module.exports.moviedetail = (req, res, next) => {
+module.exports.movieDetail = (req, res, next) => {
 
     const id = req.params.id;
 
@@ -63,3 +63,24 @@ module.exports.moviedetail = (req, res, next) => {
         })
     }
 };
+
+module.exports.newCelebrity = (req, res, next) => {
+    res.render('celebrities/form', {
+        celebrity: new Celebrity()
+    })
+}
+
+module.exports.doNewCelebrity = (req, res, next) => {
+    const body = req.body
+    console.info('body request => ', req.body)
+    const celebrity = new Celebrity(body)
+
+    celebrity.save()
+        .then(celebrity => {
+            console.log('creation result => ', celebrity)
+            res.redirect(`/celebrities/${celebrity._id}`)
+        })
+        .catch(error => {
+            next(error)
+        })
+}

@@ -3,11 +3,12 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const logger = require('morgan');
+const logger = require('morgan'); //Para que se vean los detalles en la consola más completos
 const cookieParser = require('cookie-parser');
 
 /**
  * Handlebars and Mongoose config
+ * Requerir la configuracion de HBS y de la DB desde otro fichero
  */
 require('./config/hbs.config');
 require('./config/db.config');
@@ -18,6 +19,7 @@ require('./config/db.config');
 const app = express();
 app.use(logger('dev'));
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -31,11 +33,11 @@ app.set('view engine', 'hbs');
  * Configure routes
  */
 const router = require('./config/routes.js');
-app.use('/', router); //para cualquier ruta vaya a router
+app.use('/', router); //para cualquier ruta vaya a router(./config/routes.js)
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) { //next es un callback
-    next(createError(404));
+app.use(function (req, res, next) { //si la pagina no encuentra ninguna ruta pasa aquí
+    next(createError(404)); //next es un callback
 });
 
 // error handler

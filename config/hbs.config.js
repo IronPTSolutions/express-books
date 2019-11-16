@@ -1,3 +1,5 @@
+//Todo lo que quiera configurar de HBS se configura en este archivo
+
 const hbs = require('hbs');
 const path = require('path');
 

@@ -1,0 +1,18 @@
+<h2>Create</h2>
+<form class="p-4 bg-white border" action="/celebrities/new" method="POST">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="name" class="form-control" name="name" id="name" value="{{celebrity.name}}">
+    </div>
+
+    <div class="form-group">
+        <label for="occupation">Occupation</label>
+        <input type="occupation" class="form-control" name="occupation" id="occupation" value="{{celebrity.occupation}}">
+    </div>
+
+    <div class="form-group">
+        <label for="catchPhrase">CatchPhrase</label>
+        <input type="catchPhrase" class="form-control" name="catchPhrase" id="catchPhrase" value="{{celebrity.catchPhrase}}">
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>

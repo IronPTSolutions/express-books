@@ -1,4 +1,17 @@
 <h2>Movies</h2>
+<div class="row">
 {{#each movies}}
-    <p><a href="/movies/{{_id}}">{{title}}</a></p>
+    <div class="col-sm-6">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{title}}</h5>
+                <a class="btn btn-info" href="/movies/{{_id}}">More Info</a>
+                <a class="btn btn-success" href="/movies/{{_id}}">Edit</a>
+                <a class="btn btn-danger" href="/movies/{{_id}}">Delete</a>
+            </div>
+        </div>
+    </div>
 {{/each}}
+</div>
+
+<a class="btn btn-success" href="/movies/new">New</a>
