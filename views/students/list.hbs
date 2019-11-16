@@ -1,0 +1,24 @@
+<h1>Students</h1>
+<a href="/students/create" class="btn btn-success mb-3">Create</a>
+<div class="row">
+	{{#each students as |student|}}
+	<div class="col-6 mb-3">
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title">
+					{{student.fullname}}
+				</h5>
+				<a href="/students/{{this.id}}" class="btn btn-info">
+					See details
+				</a>
+				<a href="/students/{{this.id}}/edit" class="btn btn-success">
+					Edit
+				</a>
+				<form class="d-inline" action="/students/{{this.id}}/delete" method="POST">
+					<button class="btn btn-danger" type="submit">Delete</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	{{/each}}
+</div>

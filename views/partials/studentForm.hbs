@@ -1,0 +1,37 @@
+{{#if student.isNew}}
+<form class="p-4 bg-white border" action="/students/create" method="POST">
+	{{else}}
+	<form class="p-4 bg-white border" action="/students/{{student.id}}/edit" method="POST">
+		{{/if}}
+		<div class="form-group">
+			<label for="fullname">Full name:</label>
+			<input type="text" class="form-control" name="fullname" id="fullname" value="{{student.fullname}}">
+		</div>
+
+		<div class="form-group">
+			<label for="username">Username:</label>
+			<input type="text" class="form-control" name="username" id="username" value="{{student.username}}">
+		</div>
+
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input type="password" name="password" class="form-control" id="password">
+		</div>
+
+		<div class="form-group">
+			<label for="email">Email:</label>
+			<input type="text" class="form-control" name="email" id="email" value="{{student.email}}">
+		</div>
+
+		<div class="form-group">
+			<label for="ta">TA:</label>
+			<select name="ta" id="ta" class="custom-select">
+				{{#each tas as |ta|}}
+				<option value="{{ta.id}}" {{#equals ta.id ../student.ta}}selected{{/equals}}>
+					{{ta.fullname}}</option>
+				{{/each}}
+			</select>
+		</div>
+
+		<button type="submit" class="btn btn-success">Submit</button>
+	</form>

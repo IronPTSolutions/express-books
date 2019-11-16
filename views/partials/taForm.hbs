@@ -1,0 +1,12 @@
+{{#if ta.isNew}}
+<form class="p-4 bg-white border" action="/tas/create" method="POST">
+	{{else}}
+	<form class="p-4 bg-white border" action="/tas/{{ta.id}}/edit" method="POST">
+		{{/if}}
+		<div class="form-group">
+			<label for="fullname">Full name:</label>
+			<input type="text" class="form-control" name="fullname" id="fullname" value="{{ta.fullname}}">
+		</div>
+
+		<button type="submit" class="btn btn-success">Submit</button>
+	</form>

@@ -1,0 +1,24 @@
+<div class="list-group-item list-group-item-action">
+	<div class="d-flex w-100 justify-content-between">
+		<h5 class="mb-1">{{ student.fullname }}</h5>
+		<p>
+			<small>{{student.username}}</small>
+		</p>
+		<p>
+			<small>{{student.email}}</small>
+		</p>
+		<p>
+			<small>{{student.password}}</small>
+		</p>
+		<p>
+			<small>My TA is {{student.ta.fullname}}</small>
+		</p>
+	</div>
+
+	<a href="/students/{{student.id}}/edit" class="btn btn-success">
+		Edit
+	</a>
+	<a href="/students/{{ta.id}}/delete" class="btn btn-danger">
+		Delete
+	</a>
+</div>

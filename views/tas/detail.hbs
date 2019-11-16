@@ -1,0 +1,24 @@
+<div class="list-group-item list-group-item-action">
+	<div class="d-flex w-100 justify-content-between">
+		<h5 class="mb-1">{{ ta.fullname }}</h5>
+	</div>
+	<div class="row">
+		{{#each ta.students as |student|}}
+		<div class="col-3 mb-3">
+			<div class="card">
+				<div class="card-body">
+					<a href="/students/{{student.id}}" class="card-title">
+						{{student.fullname}}
+					</a>
+				</div>
+			</div>
+		</div>
+		{{/each}}
+	</div>
+	<a href="/tas/{{ta.id}}/edit" class="btn btn-success">
+		Edit
+	</a>
+	<a href="/tas/{{ta.id}}/delete" class="btn btn-warning">
+		Delete
+	</a>
+</div>
