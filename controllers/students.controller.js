@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const Student = require('../models/student.model');
 const Ta = require('../models/ta.model');
@@ -75,7 +76,8 @@ module.exports.edit = (req, res, next) => {
 };
 
 module.exports.doEdit = (req, res, next) => {
-	Student.findByIdAndUpdate(req.params.id, req.body, { runValidators: true, new: true })
+
+	Student.findByIdAndUpdate(req.params.id, req.body, { runValidators: true, new: true, overwrite: true})
 		.then(student => {
 			if (student) {
 				res.redirect('/students')
