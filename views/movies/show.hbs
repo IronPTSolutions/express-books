@@ -1,0 +1,12 @@
+<h2>Movie's info</h2>
+  <div>
+    <h1>{{movie.title}}</h1>
+    <h5>Genre</h5>
+    <p>{{movie.genre}}</p>
+    <h5>Plot</h5>
+    <p>{{movie.plot}}</p>
+    <h5>Celebrities</h5>
+    {{#each movie.celebrities as |celebrity|}}
+      {{>showCelebrity celebrity}}
+    {{/each}}
+  </div>
